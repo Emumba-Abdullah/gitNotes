@@ -1,0 +1,106 @@
+#navbar {
+  display: flex;
+  border: 2px solid black;
+  height: 9%;
+  background: var(--primary-color);
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.2% 3%;
+}
+
+#logo {
+  display: inline-block;
+  height: 48%;
+  width: 4.2%;
+}
+
+h1 {
+  display: inline-block;
+  font-size: 45px;
+  margin-left: 1%;
+  font-family: var(--font-family);
+}
+
+.item {
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+.item:nth-child(2) {
+  justify-content: flex-end;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  border: 1px solid #bbb;
+  border-radius: 5px;
+  margin-right: 20px;
+  width: 50%;
+}
+
+input[type='search'] {
+  border: none;
+  background: transparent;
+  padding: 7px 8px;
+  font-size: 14px;
+  color: inherit;
+  border-radius: inherit;
+  width: 90%;
+  font-family: var(--font-family);
+}
+
+input[type='search']::placeholder {
+  color: #bbb;
+}
+
+input[type='search']:focus {
+  outline: none;
+}
+
+button[type='submit'] {
+  width: 40px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 7px 5px;
+}
+
+#searchIcon {
+  width: 20px;
+  color: #fff;
+  margin-right: 5px;
+}
+
+#signInBtn {
+  background-color: #fff;
+  border: 2px solid white;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--font-family);
+  font-weight: bold;
+}
+
+#menu-btn {
+  background-color: transparent;
+  overflow: hidden;
+  border-radius: 50%;
+  height: 55px;
+  width: 55px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+#menu-img {
+  height: 55px;
+  width: 55px;
+}

@@ -1,4 +1,4 @@
-import { signInWithPopup, GithubAuthProvider, AuthErrorCodes } from 'firebase/auth';
+import { signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 import { auth, provider } from '../../firebase';
 
 export const signInWithGithub = async () => {

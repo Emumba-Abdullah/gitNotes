@@ -8,6 +8,7 @@ export const signInWithGithub = async () => {
     const token = credential?.accessToken;
     const user = result.user;
 
+    localStorage.setItem('userToken', token);
     console.log('Token:', token);
     console.log('User:', user);
 

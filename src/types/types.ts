@@ -11,22 +11,17 @@ export interface IInitialState {
   user: IUser | null;
 }
 
-export interface IGistCardProps {
-  id?: string;
-  fileContent?: string;
-  OwnerName?: string;
-  OwnerImageURL?: string;
-  gistName?: string;
-  createdAt?: string;
-  gitDescripton?: string;
-}
-
 export interface IGistsdata {
   id: string;
-  fileContent: string;
-  OwnerName: string;
-  OwnerImageURL: string;
+  fileName?: string;
+  ownerName: string;
+  ownerImageUrl: string;
   gistName: string;
   createdAt: string;
-  gitDescripton: string;
+  gitDescripton?: string;
+  updatedAt?: string;
+}
+
+export interface IdataTableProps {
+  data: IGistsdata[];
 }

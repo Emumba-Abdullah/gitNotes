@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
-import GistPage from "./pages/GistPage";
+import HomePage from "./pages/homePage";
+import GistPage from "./pages/gistPage";
 import ProtectedRoute from "./ProtectedRoute";
-import MyGists from "./pages/MyGists";
-import AddGist from "./pages/AddGist";
-import StaredGists from "./pages/StaredGists";
+import MyGists from "./pages/myGists";
+import AddGist from "./pages/addGist";
+import StaredGists from "./pages/starredGists";
 
 const router = createBrowserRouter([
   {

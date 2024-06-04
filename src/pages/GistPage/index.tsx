@@ -1,8 +1,9 @@
+import React from 'react'
 
-export default function GistPage() {
+export default function gistPage() {
   return (
     <div>
-      GistPage
+      
     </div>
   )
 }

@@ -9,8 +9,10 @@ import { auth } from "./../../../firebase";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
+import { INavbarFormData, INavProps } from "../../types/types";
 
-export default function NavBar({setSearchText}) {
+
+export default function NavBar({setSearchText}:INavProps) {
   const dispatch = useAppDispatch();
   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,9 +21,8 @@ export default function NavBar({setSearchText}) {
   const { register, handleSubmit } = useForm({
     shouldUseNativeValidation: true,
   });
-  const onSubmit = async (data) => {
+  const onSubmit = async (data:INavbarFormData) => {
     setSearchText(data.searchText);
-    console.log(data);
   };
 
   const menuItems = [
@@ -59,7 +60,6 @@ export default function NavBar({setSearchText}) {
     try {
       auth.signOut();
       dispatch(logout());
-      console.log(isAuthenticated);
       toast.success("logged Out Successfully !");
     } catch (err) {
       toast.error("Error while logging out!");
@@ -83,7 +83,6 @@ export default function NavBar({setSearchText}) {
   };
 
   const handleLogin = async () => {
-    console.log(isAuthenticated);
     try {
       const user = await signInWithGithub();
       dispatch(

@@ -1,4 +1,6 @@
 import { useForm, useFieldArray, Controller } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 import { UnControlled as CodeMirror } from "react-codemirror2";
 import "codemirror/lib/codemirror.css";
 import "./styles.scss";
@@ -6,12 +8,29 @@ import { MdOutlineDeleteSweep } from "react-icons/md";
 import NavBar from "../../components/Navbar";
 import { addAGist } from "../../services/gistServices";
 import { IGistBody } from "../../types/types";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const validationSchema = Yup.object().shape({
+  description: Yup.string().required("Description is required"),
+  files: Yup.array()
+    .of(
+      Yup.object().shape({
+        fileName: Yup.string().required("Filename is required"),
+        content: Yup.string().required("Content is required"),
+      })
+    )
+    .min(1, "At least one file is required"),
+});
 
 export default function AddGist() {
-  const { register, control, handleSubmit } = useForm({
+  const { register, control, handleSubmit, formState: {isDirty, isValid }, reset } = useForm({
     defaultValues: {
+      description: "",
       files: [{ fileName: "", content: "" }],
     },
+    resolver: yupResolver(validationSchema),
+    mode: "onChange",
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -19,11 +38,19 @@ export default function AddGist() {
     name: "files",
   });
 
-  const onSubmit =async(data:IGistBody) => {
-    console.log("Submitted Data:", data);
-    const res = await addAGist(data);
-    alert(res.status)
-    };
+  const onSubmit = async (data: IGistBody) => {
+    try {
+      const res = await addAGist(data);
+      if (res.status === 201) {
+        reset();
+        toast.success("Gist created successfully!");
+      } else {
+        toast.error("Failed to create gist. Please try again.");
+      }
+    } catch (error) {
+      toast.error(`Error: ${error.message}`);
+    }
+  };
 
   return (
     <div className="gist-container">
@@ -59,7 +86,6 @@ export default function AddGist() {
               <div className="editor">
                 <Controller
                   name={`files.${index}.content`}
-
                   control={control}
                   defaultValue=""
                   render={({ field }) => (
@@ -88,7 +114,7 @@ export default function AddGist() {
             Add File
           </button>
 
-          <button id="submitGist" type="submit">
+          <button id="submitGist" type="submit" disabled={!isDirty || !isValid}>
             Create Gist
           </button>
         </div>

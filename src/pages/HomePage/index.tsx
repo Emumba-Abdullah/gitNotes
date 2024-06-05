@@ -17,7 +17,6 @@ import "./styles.scss";
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function HomePage() {
-  const [searchText, setSearchText] = useState<string>("");
   const [currentPage, setCurrentPage] = useState(1);
   const [filteredData, setFilteredData] = useState([]);
   const itemsPerPage = 8;
@@ -55,12 +54,9 @@ export default function HomePage() {
   };
 
   const handleSearchText = (text: string) => {
-    setSearchText(text);
     const temp = data.filter((gist) => {
       return gist.fileName.filename.toLowerCase() === text.toLowerCase();
     });
-
-    console.log(temp)
 
     if (temp.length === 0 && text) {
       toast.warn('No results found. Displaying all gists.');

@@ -5,7 +5,6 @@ import GistPage from "./pages/gistPage";
 import ProtectedRoute from "./ProtectedRoute";
 import MyGists from "./pages/myGists";
 import AddGist from "./pages/addGist";
-import StaredGists from "./pages/starredGists";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +31,6 @@ const router = createBrowserRouter([
       {
         path: "/addgist",
         element: <AddGist />,
-      },
-      {
-        path: "/starredgists",
-        element: <StaredGists />,
       },
     ],
   },

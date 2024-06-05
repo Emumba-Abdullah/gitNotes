@@ -77,3 +77,18 @@ export const addAGist = async (data: IGistBody) => {
   });
   return res;
 };
+
+export const isGistStarred = async (id: string) => {
+  let token = '';
+  if (localStorage.getItem('user') && localStorage.getItem('userToken')) {
+    token = localStorage.getItem('userToken') || '';
+  }
+  const res = await octokit.request('GET /gists/{gist_id}/star', {
+    gist_id: id,
+    headers: {
+      'X-GitHub-Api-Version': '2022-11-28',
+      Authorization: 'Bearer ' + token,
+    },
+  });
+  return res;
+};

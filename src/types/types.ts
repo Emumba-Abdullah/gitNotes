@@ -41,3 +41,11 @@ interface IData {
 export interface IFileData {
   [key: string]: IData;
 }
+
+export interface INavProps {
+  setSearchText: (arg: string) => void;
+}
+
+export interface INavbarFormData {
+  searchText: string;
+}

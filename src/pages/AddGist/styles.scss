@@ -83,4 +83,16 @@
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submitGist:disabled {
+  background-color: #7a7a7a;
+  color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  display: none;
 }

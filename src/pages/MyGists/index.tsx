@@ -9,8 +9,8 @@ import { IGistsdata } from "../../types/types";
 import "./styles.scss"
 
 const itemsPerPage = 2; 
-const user = JSON.parse(localStorage.getItem("user"));
-
+const user = localStorage.getItem("user");
+const parsedUser = user ? JSON.parse(user) : null;
 
 export default function MyGists() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -46,7 +46,7 @@ export default function MyGists() {
       <div className="myGistsContainer">
         <div className="personal-info-container">
           <img src="https://avatars.githubusercontent.com/u/169022063?s=400&u=bac1bf25039c7f2adbd1ec36c5b9274d88315617&v=4" alt="userImage" />
-          <h2>{user.displayName}</h2>
+          <h2>{parsedUser?.displayName}</h2>
           <button className="profile-btn">View GitHub Profile</button>
         </div>
         <div className="userGistData">

@@ -17,5 +17,6 @@ const app = initializeApp(firebaseConfig);
 // Initialize Firebase Auth and GitHub Auth Provider
 const auth = getAuth(app);
 const provider = new GithubAuthProvider();
+provider.addScope('gist');
 
 export { auth, provider };

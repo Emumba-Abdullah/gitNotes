@@ -3,7 +3,7 @@ import { FaCodeFork } from "react-icons/fa6";
 import { CiStar } from "react-icons/ci";
 import { useState } from "react";
 import { IdataTableProps } from "../../types/types";
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function DataTable({ data }: IdataTableProps) {
@@ -11,6 +11,7 @@ export default function DataTable({ data }: IdataTableProps) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 8; 
   const totalPages = Math.ceil(data.length / itemsPerPage);
+  const navigate = useNavigate();
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
@@ -23,6 +24,10 @@ export default function DataTable({ data }: IdataTableProps) {
       setCurrentPage(currentPage + 1);
     }
   };
+
+  const handleGistClick = (id:string) => {
+     navigate(`/gist/${id}`)
+  }
 
   const startIndex = (currentPage - 1) * itemsPerPage;
   const selectedData = data.slice(startIndex, startIndex + itemsPerPage);
@@ -40,7 +45,7 @@ export default function DataTable({ data }: IdataTableProps) {
         </thead>
         <tbody>
           {selectedData.map((gist) => (
-            <tr key={gist.id}>
+            <tr key={gist.id} onClick={() => { handleGistClick(gist.id) }}>
               <td className="name-cell">
                 <img
                   src={gist.ownerImageUrl}

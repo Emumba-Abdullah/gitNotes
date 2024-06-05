@@ -4,18 +4,28 @@ import Elogo from "./../../assets/logo.png";
 import searchIcon from "./../../assets/search.png";
 import { signInWithGithub } from "../../utils/firebaseUtils";
 import { useAppDispatch, useAppSelector } from "../../Store/hooks";
-import { login,logout } from "../../Store/authUser/authSlice";
-import { auth } from './../../../firebase';
+import { login, logout } from "../../Store/authUser/authSlice";
+import { auth } from "./../../../firebase";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
-export default function NavBar() {
+export default function NavBar({setSearchText}) {
   const dispatch = useAppDispatch();
-  const { isAuthenticated,user } = useAppSelector((state) => state.auth);
+  const { isAuthenticated, user } = useAppSelector((state) => state.auth);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
 
+  const { register, handleSubmit } = useForm({
+    shouldUseNativeValidation: true,
+  });
+  const onSubmit = async (data) => {
+    setSearchText(data.searchText);
+    console.log(data);
+  };
+
   const menuItems = [
-    "Signed in as",
+    `${user?.displayName.slice(0,14)}`,
     "Your gists",
     "Add a gist",
     "Your GitHub profile",
@@ -23,22 +33,22 @@ export default function NavBar() {
     "Logout",
   ];
 
-  const handleClick = (item:string) => {
+  const handleClick = (item: string) => {
     switch (item) {
-      case 'Logout':
+      case "Logout":
         handleLogoutClick();
         break;
-      case 'Your gists':
+      case "Your gists":
         handleYourGistsClick();
         break;
-       case 'Add a gist':
+      case "Add a gist":
         handleAddGistClick();
         break;
-       case 'Your GitHub profile':
+      case "Your GitHub profile":
         handleNavigateToGitProfile();
         break;
-       case 'Help':
-        handleHelpClick ();
+      case "Help":
+        handleHelpClick();
         break;
       default:
         console.log("Not Clicked");
@@ -47,48 +57,48 @@ export default function NavBar() {
 
   const handleLogoutClick = () => {
     try {
-      auth.signOut(); 
+      auth.signOut();
       dispatch(logout());
-      console.log(isAuthenticated)
+      console.log(isAuthenticated);
+      toast.success("logged Out Successfully !");
+    } catch (err) {
+      toast.error("Error while logging out!");
     }
-    catch (err) {
-      console.log(err);
-    }
-  }
+  };
 
   const handleYourGistsClick = () => {
     navigate("/mygists");
-  }
+  };
 
   const handleAddGistClick = () => {
     navigate("/addgist");
-  }
+  };
 
-  const handleNavigateToGitProfile = () => {
-  
-  }
+  const handleNavigateToGitProfile = () => {};
 
-  const handleHelpClick = () => {
-    
-  }
+  const handleHelpClick = () => {};
 
   const handleHomePageNavigation = () => {
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   const handleLogin = async () => {
     console.log(isAuthenticated);
-    const user = await signInWithGithub();
-    dispatch(
-      login({
-        displayName: user.displayName,
-        accessToken: user.accessToken,
-        uid: user.uid,
-        email: user.email,
-        photoURL: user.photoURL,
-      })
-    );
-    console.log(isAuthenticated);
+    try {
+      const user = await signInWithGithub();
+      dispatch(
+        login({
+          displayName: user.displayName,
+          accessToken: user.accessToken,
+          uid: user.uid,
+          email: user.email,
+          photoURL: user.photoURL,
+        }),
+      );
+      toast.success("logged In Successfully !");
+    } catch (error) {
+      toast.error("error while LogIn, please try again!");
+    }
   };
 
   return (
@@ -98,8 +108,14 @@ export default function NavBar() {
         <h1 onClick={handleHomePageNavigation}>EMUMBA</h1>
       </div>
       <div className="item">
-        <form>
-          <input type="search" placeholder="Search Gists..." />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            {...register("searchText", {
+              required: "You need to add something!",
+            })}
+            type="search"
+            placeholder="Search Gists..."
+          />
           <button type="submit">
             <img src={searchIcon} alt="" id="searchIcon" />
           </button>
@@ -111,16 +127,12 @@ export default function NavBar() {
             onMouseEnter={() => setIsMenuOpen(true)}
             onMouseLeave={() => setIsMenuOpen(false)}
           >
-            {user&&
-               <button id="menu-btn">
-              <img
-                src={user.photoURL}
-                alt="user profile"
-                id="menu-img"
-              />
-            </button>
-            }
-           
+            {user && (
+              <button id="menu-btn">
+                <img src={user.photoURL} alt="user profile" id="menu-img" />
+              </button>
+            )}
+
             {isMenuOpen && (
               <ul className="menu">
                 {menuItems.map((item) => (

@@ -50,7 +50,7 @@ input[type='search'] {
   background: transparent;
   padding: 7px 8px;
   font-size: 14px;
-  color: inherit;
+  color: white;
   border-radius: inherit;
   width: 90%;
   font-family: var(--font-family);
@@ -110,6 +110,7 @@ button[type='submit'] {
 
 .menu-container {
   position: relative;
+  z-index: 1000;
 }
 
 .menu {

@@ -10,8 +10,12 @@ import { CiStar } from "react-icons/ci";
 import "./styles.scss";
 import dayjs from "dayjs";
 
+import { toast } from 'react-toastify';
+import { useState } from "react";
+
 export default function GistPage() {
   const { id } = useParams();
+  const [isStarred, setIsStarred] = useState<boolean>(false);
 
   const { isAuthenticated } = useAppSelector((state) => state.auth);
 
@@ -30,24 +34,63 @@ export default function GistPage() {
   const handleForkClick = async () => {
     if (isAuthenticated) {
       if (id) {
-        const res = await forkAGist(id);
-        console.log(res);
-        alert(res.status);
+
+        try {
+           const res = await forkAGist(id);
+          if (res.status == 201)
+          {
+            toast.success('Forked successfuly!');
+          }
+          else if (res.status == 403)
+          {
+            toast.error('Request Forbidden');
+          }
+            else if (res.status == 404)
+          {
+            toast.error('Resource not found!');
+          }
+          else if (res.status == 422)
+          {
+            toast.error('Endpoint spammed');
+          }
+        } catch (error)
+        {
+           toast.error('Sorry, cannot be forked');
+        }
       }
     } else {
-      alert("You need to authenticate first");
+     toast.info('Please logIn to your account first!');
     }
   };
 
   const handleStarClick = async () => {
     if (isAuthenticated) {
       if (id) {
-        const res = await starAGist(id);
-        console.log(res);
-        alert(res.status);
+
+        try {
+          const res = await starAGist(id);
+          if (res.status == 204)
+          {
+            toast.success('Starred successfuly!');
+          }
+          else if (res.status == 304)
+          {
+            toast.error('Action not done');
+          }
+            else if (res.status == 404)
+          {
+            toast.error('Resource not found!');
+          }
+          else if (res.status == 403)
+          {
+            toast.error('Request Forbidden');
+          }
+        } catch (error) {
+          toast.error("Action not performed")
+        }
       }
     } else {
-      alert("You need to authenticate first");
+      toast.info('Please logIn to your account first!');
     }
   };
 
@@ -94,4 +137,3 @@ export default function GistPage() {
   );
 }
 
-//<CiStar />

@@ -8,6 +8,7 @@
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: black;
+  overflow: hidden;
 
   .card-content {
     margin-bottom: 16px;
@@ -20,6 +21,7 @@
     align-items: center;
     border-top: 1px solid #ddd;
     padding-top: 10px;
+    overflow: hidden;
 
     .user-image {
       border-radius: 50%;

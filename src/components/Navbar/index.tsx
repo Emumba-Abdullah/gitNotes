@@ -17,7 +17,7 @@ export default function NavBar() {
   const menuItems = [
     "Signed in as",
     "Your gists",
-    "Starred gists",
+    "Add a gist",
     "Your GitHub profile",
     "Help",
     "Logout",
@@ -31,8 +31,8 @@ export default function NavBar() {
       case 'Your gists':
         handleYourGistsClick();
         break;
-       case 'Starred gists':
-        handleStarredGistsClick();
+       case 'Add a gist':
+        handleAddGistClick();
         break;
        case 'Your GitHub profile':
         handleNavigateToGitProfile();
@@ -60,8 +60,8 @@ export default function NavBar() {
     navigate("/mygists");
   }
 
-  const handleStarredGistsClick = () => {
-    navigate("/starredgists");
+  const handleAddGistClick = () => {
+    navigate("/addgist");
   }
 
   const handleNavigateToGitProfile = () => {
@@ -72,6 +72,9 @@ export default function NavBar() {
     
   }
 
+  const handleHomePageNavigation = () => {
+    navigate("/")
+  }
 
   const handleLogin = async () => {
     console.log(isAuthenticated);
@@ -91,8 +94,8 @@ export default function NavBar() {
   return (
     <nav id="navbar">
       <div className="item">
-        <img src={Elogo} alt="" id="logo" />
-        <h1>EMUMBA</h1>
+        <img src={Elogo} alt="" id="logo" onClick={handleHomePageNavigation} />
+        <h1 onClick={handleHomePageNavigation}>EMUMBA</h1>
       </div>
       <div className="item">
         <form>

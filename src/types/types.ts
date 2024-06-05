@@ -25,3 +25,19 @@ export interface IGistsdata {
 export interface IdataTableProps {
   data: IGistsdata[];
 }
+
+export interface IFile {
+  fileName: string;
+  content: string;
+}
+export interface IGistBody {
+  files: IFile[];
+  description: string;
+}
+
+interface IData {
+  content: string;
+}
+export interface IFileData {
+  [key: string]: IData;
+}

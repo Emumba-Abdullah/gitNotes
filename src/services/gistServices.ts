@@ -1,4 +1,5 @@
 import { Octokit } from 'octokit';
+import { IFile, IFileData, IGistBody } from '../types/types';
 
 const octokit = new Octokit({
   auth: localStorage.getItem('user') ? localStorage.getItem('userToken') : null,
@@ -52,4 +53,27 @@ export const starAGist = async (id: string) => {
     },
   });
   return resp;
+};
+
+export const addAGist = async (data: IGistBody) => {
+  let token = '';
+  if (localStorage.getItem('user') && localStorage.getItem('userToken')) {
+    token = localStorage.getItem('userToken') || '';
+  }
+  const fileData: IFileData = {};
+  data.files.forEach((file: IFile) => {
+    fileData[file.fileName] = { content: file.content };
+  });
+
+  console.log(fileData);
+  const res = await octokit.request('POST /gists', {
+    description: data.description,
+    public: false,
+    files: fileData,
+    headers: {
+      'X-GitHub-Api-Version': '2022-11-28',
+      Authorization: 'Bearer ' + token,
+    },
+  });
+  return res;
 };

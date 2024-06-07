@@ -1,5 +1,6 @@
 import { signInWithPopup, GithubAuthProvider } from 'firebase/auth';
 import { auth, provider } from '../../firebase';
+import { toast } from 'react-toastify';
 
 export const signInWithGithub = async () => {
   try {
@@ -9,12 +10,10 @@ export const signInWithGithub = async () => {
     const user = result.user;
 
     localStorage.setItem('userToken', token);
-    console.log('Token:', token);
-    console.log('User:', user);
 
     return user;
   } catch (error: any) {
-    console.error('Error signing in with GitHub: ', error);
+    toast.error('Error signing in with GitHub: ');
     return error;
   }
 };

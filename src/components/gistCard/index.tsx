@@ -1,4 +1,3 @@
-import "highlight.js/styles/default.css";
 import "./styles.scss";
 import ReactEmbedGist from 'react-embed-gist';
 import { useNavigate } from "react-router-dom";
@@ -11,8 +10,8 @@ export default function GistCard({
   gistName,
   createdAt,
 }:IGistsdata) {
-
   const navigate = useNavigate();
+
   const handleCardClick = () => {
     navigate(`/gist/${id}`)
   }
@@ -20,7 +19,6 @@ export default function GistCard({
   return (
     <div className="card" onClick={handleCardClick}> 
       <div className="card-content">
-       
         <ReactEmbedGist
           gist={`${ownerName}/${id}`}
           titleClass="gist-title"

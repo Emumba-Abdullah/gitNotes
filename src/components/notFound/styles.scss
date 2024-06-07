@@ -1,0 +1,25 @@
+#no-results-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  text-align: center;
+  color: #555;
+}
+
+#no-results-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+#no-results-text {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+#no-results-subtext {
+  font-size: 1rem;
+  color: #777;
+}

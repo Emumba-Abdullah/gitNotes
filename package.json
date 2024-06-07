@@ -17,8 +17,6 @@
     "codemirror": "^5.65.16",
     "dayjs": "^1.11.11",
     "firebase": "^10.12.1",
-    "font-awesome": "^4.7.0",
-    "highlight.js": "^11.9.0",
     "octokit": "^4.0.2",
     "react": "^18.2.0",
     "react-codemirror2": "^8.0.0",

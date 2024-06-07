@@ -20,6 +20,7 @@ export interface IGistsdata {
   createdAt: string;
   gitDescripton?: string;
   updatedAt?: string;
+  gitHubUrl?: string;
 }
 
 export interface IdataTableProps {

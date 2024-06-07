@@ -1,94 +1,89 @@
-import { useState, useEffect } from "react";
-import { useQuery } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import NavBar from "../../components/Navbar";
-import GistCard from "../../components/gistCard";
-import DataTable from "../../components/dataTable";
-
-import { getGistsApiCall } from "../../services/gistServices";
-import { getFilteredResults } from "../../utils/queries";
-
-import { IGistsdata } from "../../types/types";
-
-import grid from "./../../assets/layout.png";
-import table from "./../../assets/list.png";
-import "./styles.scss";
+import NavBar from '../../components/navbar';
+import GistCard from '../../components/gistCard';
+import DataTable from '../../components/dataTable';
+import { IGistsdata } from '../../types/types';
+import grid from './../../assets/layout.png';
+import table from './../../assets/list.png';
+import './styles.scss';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { usePagination } from '../../services/hooks/usePagination';
+import { usePublicGistsData } from '../../services/hooks/usePublicGistData';
+import NoResultsFound from '../../components/notFound';
+
+import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
+
 export default function HomePage() {
-  const [currentPage, setCurrentPage] = useState(1);
+  
   const [filteredData, setFilteredData] = useState([]);
   const itemsPerPage = 8;
-  const [layout, setLayout] = useState("tabular");
-  const { data, isLoading, isError } = useQuery({
-    queryKey: ['gists'],
-    queryFn: getGistsApiCall,
-    select: getFilteredResults,
-  });
+  const [layout, setLayout] = useState('tabular');
+  const isAuthenticated = false; 
+
+  const publicGistResponse = usePublicGistsData(isAuthenticated);
+
+  const pagination = usePagination(filteredData, itemsPerPage);
 
   useEffect(() => {
-    if (data)
-      setFilteredData(data);
-  }, [data]);
-
-  if (isLoading) return <h1>Loading....</h1>;
-  if (isError) return <h1>Error loading data!!!</h1>;
-
-  const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+    if (publicGistResponse.data) {
+      setFilteredData(publicGistResponse.data);
+      pagination.setCurrentPage(1);
+    }
+  }, [publicGistResponse.data, pagination.setCurrentPage]);
 
   const handleLayoutChange = (newLayout: string) => {
     setLayout(newLayout);
   };
 
-  const handlePrevPage = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-    }
-  };
-
   const handleSearchText = (text: string) => {
-    const temp = data.filter((gist) => {
+    const temp = publicGistResponse.data.filter((gist) => {
       return gist.fileName.filename.toLowerCase() === text.toLowerCase();
     });
 
     if (temp.length === 0 && text) {
-      toast.warn('No results found. Displaying all gists.');
-      setFilteredData(data);
+      toast.warn('No results found.');
+      setFilteredData([]);
     } else {
       setFilteredData(temp);
     }
+    pagination.setCurrentPage(1);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const selectedData = filteredData.slice(startIndex, startIndex + itemsPerPage);
+  if (publicGistResponse.isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (publicGistResponse.isError) {
+    return <div>Error loading data.</div>;
+  }
 
   return (
     <div className="container">
       <NavBar setSearchText={handleSearchText} />
+      
       <div className="layout-manager">
         <h2>Public Gists</h2>
         <div>
-          <button className="icon-btn" onClick={() => handleLayoutChange("tabular")}>
+          <button className="icon-btn" onClick={() => handleLayoutChange('tabular')}>
             <img src={grid} alt="table" className="icon" />
           </button>
-          <button className="icon-btn" onClick={() => handleLayoutChange("grid")}>
+          <button className="icon-btn" onClick={() => handleLayoutChange('grid')}>
             <img src={table} alt="card" className="icon" />
           </button>
         </div>
       </div>
-      {layout === "tabular" ? (
+      
+      {filteredData.length === 0 ? (
+        <NoResultsFound/>
+      ) : layout === 'tabular' ? (
         filteredData && <DataTable data={filteredData} />
       ) : (
         <div className="cardLayout">
           <div className="grid-container">
-            {selectedData.map((gist: IGistsdata) => (
+            {pagination.selectedData.map((gist: IGistsdata) => (
               <GistCard
                 key={gist.id}
                 id={gist.id}
@@ -99,13 +94,14 @@ export default function HomePage() {
               />
             ))}
           </div>
+          
           <div className="pagination">
-            <button onClick={handlePrevPage} disabled={currentPage === 1}>
-              &lt;
+            <button onClick={pagination.handlePrevPage} disabled={pagination.currentPage === 1}>
+               <MdOutlineNavigateBefore/>
             </button>
-            <span> Page {currentPage} of {totalPages} </span>
-            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
-              &gt;
+            <span> Page {pagination.currentPage} of {pagination.totalPages} </span>
+            <button onClick={pagination.handleNextPage} disabled={pagination.currentPage === pagination.totalPages}>
+               <MdOutlineNavigateNext/>
             </button>
           </div>
         </div>

@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 import NavBar from '../../components/navbar';
 import GistCard from '../../components/gistCard';
 import DataTable from '../../components/dataTable';
-import { IGistsdata } from '../../types/types';
+import { IGistsdata, IPagination } from '../../types/types';
 import grid from './../../assets/layout.png';
 import table from './../../assets/list.png';
 import './styles.scss';
@@ -14,25 +14,28 @@ import { usePagination } from '../../services/hooks/usePagination';
 import { usePublicGistsData } from '../../services/hooks/usePublicGistData';
 import NoResultsFound from '../../components/notFound';
 
-import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
-
 import { TailSpin } from "react-loader-spinner";
+import Pagination from '../../components/pagination';
 
 export default function HomePage() {
   
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState<IGistsdata[]>([]);
   const itemsPerPage = 8;
   const [layout, setLayout] = useState('tabular');
   const isAuthenticated = false; 
 
   const publicGistResponse = usePublicGistsData(isAuthenticated);
 
-  const pagination = usePagination(filteredData, itemsPerPage);
+  const pagination:IPagination = usePagination(filteredData, itemsPerPage);
 
   useEffect(() => {
     if (publicGistResponse.data) {
       setFilteredData(publicGistResponse.data);
-      pagination.setCurrentPage(1);
+      if (pagination)
+      {
+        pagination.setCurrentPage(1);
+      }
+      
     }
   }, [publicGistResponse.data, pagination.setCurrentPage]);
 
@@ -69,16 +72,16 @@ export default function HomePage() {
       <div className="layout-manager">
         <h2>Public Gists</h2>
         <div>
-          <button className="icon-btn" onClick={() => handleLayoutChange('tabular')}>
+          <button className="icon-btn" onClick={() => handleLayoutChange('grid')}>
             <img src={grid} alt="table" className="icon" />
           </button>
-          <button className="icon-btn" onClick={() => handleLayoutChange('grid')}>
+          <button className="icon-btn" onClick={() => handleLayoutChange('tabular')}>
             <img src={table} alt="card" className="icon" />
           </button>
         </div>
       </div>
       
-      {filteredData.length === 0 ? (
+      {filteredData?.length === 0 ? (
         <NoResultsFound/>
       ) : layout === 'tabular' ? (
         filteredData && <DataTable data={filteredData} />
@@ -96,16 +99,7 @@ export default function HomePage() {
               />
             ))}
           </div>
-          
-          <div className="pagination">
-            <button onClick={pagination.handlePrevPage} disabled={pagination.currentPage === 1}>
-               <MdOutlineNavigateBefore/>
-            </button>
-            <span> Page {pagination.currentPage} of {pagination.totalPages} </span>
-            <button onClick={pagination.handleNextPage} disabled={pagination.currentPage === pagination.totalPages}>
-               <MdOutlineNavigateNext/>
-            </button>
-          </div>
+            <Pagination pagination={pagination}/>
         </div>
       )}
     </div>

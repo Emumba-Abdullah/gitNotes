@@ -1,3 +1,5 @@
+import React from 'react';
+
 export interface IUser {
   accessToken: string;
   displayName: string;
@@ -12,12 +14,12 @@ export interface IInitialState {
 }
 
 export interface IGistsdata {
-  id: string;
+  id?: string;
   fileName?: string;
-  ownerName: string;
-  ownerImageUrl: string;
-  gistName: string;
-  createdAt: string;
+  ownerName?: string;
+  ownerImageUrl?: string;
+  gistName?: string;
+  createdAt?: string;
   gitDescripton?: string;
   updatedAt?: string;
   gitHubUrl?: string;
@@ -49,4 +51,13 @@ export interface INavProps {
 
 export interface INavbarFormData {
   searchText: string;
+}
+
+export interface IPagination {
+  currentPage: number;
+  totalPages: number;
+  selectedData: IGistsdata[];
+  handleNextPage: () => void;
+  handlePrevPage: () => void;
+  setCurrentPage: React.Dispatch<number>;
 }

@@ -7,8 +7,9 @@ import './styles.scss';
 import { usePagination } from '../../services/hooks/usePagination';
 import { usePublicGistsData } from '../../services/hooks/usePublicGistData';
 
-import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 import { TailSpin } from "react-loader-spinner";
+
+import Pagination from '../../components/pagination';
 
 const user = localStorage.getItem('user');
 const parsedUser = user ? JSON.parse(user) : null;
@@ -66,15 +67,7 @@ export default function MyGists() {
             ))}
           </div>
           
-          <div className="pagination">
-            <button onClick={pagination.handlePrevPage} disabled={pagination.currentPage === 1}>
-              <MdOutlineNavigateBefore/>
-            </button>
-            <span> Page {pagination.currentPage} of {pagination.totalPages} </span>
-            <button onClick={pagination.handleNextPage} disabled={pagination.currentPage === pagination.totalPages}>
-               <MdOutlineNavigateNext/>
-            </button>
-          </div>
+          <Pagination pagination={pagination}/>
         </div>
       </div>
     </div>

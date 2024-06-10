@@ -1,11 +1,12 @@
 import "./styles.scss";
 import { FaCodeFork } from "react-icons/fa6";
 import { CiStar } from "react-icons/ci";
-import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
+
 
 import { IdataTableProps } from "../../types/types";
 import { useNavigate } from "react-router-dom";
 import { usePagination } from '../../services/hooks/usePagination';
+import Pagination from "../pagination";
 
 const ITEMS_PER_PAGE = 8;
 
@@ -14,7 +15,7 @@ export default function DataTable({ data }: IdataTableProps) {
   
   const pagination = usePagination(data, ITEMS_PER_PAGE);
 
-  const handleGistClick = (id: string) => {
+  const handleGistClick = (id: string|undefined) => {
     navigate(`/gist/${id}`);
   };
 
@@ -55,17 +56,7 @@ export default function DataTable({ data }: IdataTableProps) {
         <tfoot>
           <tr>
             <td colSpan="4">
-              <div className="pagination">
-                <button onClick={pagination.handlePrevPage} disabled={pagination.currentPage === 1}>
-                  <MdOutlineNavigateBefore />
-                </button>
-                <span>
-                  Page {pagination.currentPage} of {pagination.totalPages}
-                </span>
-                <button onClick={pagination.handleNextPage} disabled={pagination.currentPage === pagination.totalPages}>
-                  <MdOutlineNavigateNext />
-                </button>
-              </div>
+             <Pagination pagination={pagination}/>
             </td>
           </tr>
         </tfoot>

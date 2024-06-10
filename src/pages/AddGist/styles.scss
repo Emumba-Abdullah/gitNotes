@@ -1,10 +1,10 @@
-.gist-container {
+#gist-container {
   width: 100%;
   height: 100%;
   font-family: 'Inter', sans-serif;
 }
 
-.addGist {
+#addGist {
   display: flex;
   flex-direction: column;
   width: 60%;
@@ -26,14 +26,14 @@
   overflow: hidden;
   border-radius: 5px;
 
-  .filename-container {
+  #filename-container {
     width: 100%;
     padding: 20px 2px;
     background-color: #efefef;
     display: flex;
     padding-left: 30px;
 
-    .filename-input {
+    #filename-input {
       padding: 8px;
       border: 2px solid #efefef;
       border-radius: 5px;
@@ -42,7 +42,7 @@
   }
 }
 
-.delete-button {
+#delete-button {
   color: rgb(186, 16, 16);
   border: none;
   font-size: 30px;
@@ -52,7 +52,7 @@
   }
 }
 
-.add-file-button {
+#add-file-button {
   padding: 10px 20px;
   background-color: red;
   width: 100px;
@@ -66,7 +66,7 @@
   cursor: pointer;
 }
 
-.footer-container {
+#footer-container {
   width: 66%;
   margin-top: 20px;
   display: flex;

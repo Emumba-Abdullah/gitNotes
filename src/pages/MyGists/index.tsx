@@ -8,15 +8,15 @@ import { usePagination } from '../../services/hooks/usePagination';
 import { usePublicGistsData } from '../../services/hooks/usePublicGistData';
 
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
+import { TailSpin } from "react-loader-spinner";
 
 const user = localStorage.getItem('user');
 const parsedUser = user ? JSON.parse(user) : null;
-
+const itemsPerPage = 2;
+const isAuthenticated = true;
 
 export default function MyGists() {
   const [filteredData, setFilteredData] = useState([]);
-  const itemsPerPage = 2;
-  const isAuthenticated = true;
 
   const publicGistData = usePublicGistsData(isAuthenticated);
    
@@ -29,7 +29,7 @@ export default function MyGists() {
   }, [publicGistData.data]);
 
   if (publicGistData.isLoading) {
-    return <h1>Loading....</h1>;
+    return <div id='spinner-container'><TailSpin color='#003b44'/> </div>
   }
 
   if (publicGistData.isError) {

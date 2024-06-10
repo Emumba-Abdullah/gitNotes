@@ -110,7 +110,7 @@ export default function NavBar({ setSearchText }: INavProps) {
 
         {isAuthenticated ? (
           <div
-            className="menu-container"
+            id="menu-container"
             onMouseEnter={() => setIsMenuOpen(true)}
             onMouseLeave={() => setIsMenuOpen(false)}
           >
@@ -121,11 +121,11 @@ export default function NavBar({ setSearchText }: INavProps) {
             )}
 
             {isMenuOpen && (
-              <ul className="menu">
+              <ul id="menu">
                 {menuItems.map((item) => (
                   <li key={item}>
                     <button
-                      className="menu-item"
+                      id="menu-item"
                       onClick={() => handleNavigation(item)}
                     >
                       {item}

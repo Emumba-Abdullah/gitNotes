@@ -1,15 +1,15 @@
-.container {
+#container {
   width: 100vw;
   height: 100vh;
   font-family: 'inter';
-  .gistpage-header {
+  #gistpage-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     margin: auto;
     margin-top: 30px;
     width: 85%;
-    .btn-container {
+    #btn-container {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -65,37 +65,37 @@
     }
   }
 
-  .gist-content {
+  #gist-content {
     width: 85%;
     margin: 30px auto;
   }
 }
 
-.card-footer {
+#card-footer {
   display: flex;
   align-items: center;
   padding-top: 10px;
 
-  .user-image {
+  #user-image {
     border-radius: 50%;
     width: 70px;
     height: 70px;
     margin-right: 10px;
   }
 
-  .user-details {
+  #user-details {
     display: flex;
     flex-direction: column;
     line-height: 1.2;
 
-    .user-name {
+    #user-name {
       font-weight: bold;
       font-family: inter;
     }
   }
 }
 
-.filled {
+#filled {
   color: yellow;
   margin-right: 10px;
 }

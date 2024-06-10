@@ -7,6 +7,7 @@ import { useAppSelector } from "../../Store/hooks";
 import { useAGist } from "../../services/hooks/useAGist";
 import { useStarGist } from "../../services/hooks/useStarGist";
 import { useGistFork } from "../../services/hooks/useGistFork";
+import { TailSpin } from "react-loader-spinner";
 import "./styles.scss";
 
 export default function GistPage() {
@@ -16,25 +17,27 @@ export default function GistPage() {
   const { isStarred, handleStarClick } = useStarGist(id, isAuthenticated);
   const { handleForkClick } = useGistFork(id, isAuthenticated);
 
-  if (gistDataQueryResponse.isLoading) return <h1>Loading....</h1>;
+  if (gistDataQueryResponse.isLoading) return <div id='spinner-container'><TailSpin color='#003b44'/> </div>
   if (gistDataQueryResponse.isError) return <h1>Error loading data!!!</h1>;
 
   return (
-    <div className="container">
+    <div id="container">
+
       <NavBar />
-      <div className="gistpage-header">
-        <div className="user-info">
-          <div className="card-footer">
-            <img src={ gistDataQueryResponse.data?.owner?.avatar_url} alt="User" className="user-image" />
-            <div className="user-details">
-              <span className="user-name">{gistDataQueryResponse.data?.owner?.login}</span>
-              <div className="gist-info">
+      <div id="gistpage-header">
+        <div id="user-info">
+          <div  id="card-footer">
+            <img src={ gistDataQueryResponse.data?.owner?.avatar_url} alt="User" id="user-image" />
+            <div id="user-details">
+              <span id="user-name">{gistDataQueryResponse.data?.owner?.login}</span>
+              <div id="gist-info">
                 <span>Created at { gistDataQueryResponse.data?.createdAt}</span>
               </div>
             </div>
           </div>
         </div>
-        <div className="btn-container">
+        <div id="btn-container">
+
           <button onClick={handleForkClick} className="btn">
             <div className="icon-text">
               <FaCodeFork className="icon" /> <h2>fork</h2>
@@ -46,7 +49,7 @@ export default function GistPage() {
 
           <button onClick={handleStarClick} className="btn">
             <div className="icon-text">
-              {isStarred ? <FaStar className="filled" /> : <CiStar className="icon" />}
+              {isStarred ? <FaStar id="filled" /> : <CiStar className="icon" />}
               <h2>star</h2>
             </div>
             <div className="action-times">
@@ -56,7 +59,7 @@ export default function GistPage() {
         </div>
       </div>
 
-      <div className="gist-content">
+      <div id="gist-content">
         <ReactEmbedGist gist={`${gistDataQueryResponse.data?.owner?.login}/${id}`} titleClass="gist-title" />
       </div>
     </div>

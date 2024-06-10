@@ -17,19 +17,19 @@ export default function GistCard({
   }
 
   return (
-    <div className="card" onClick={handleCardClick}> 
-      <div className="card-content">
+    <div id="card" onClick={handleCardClick}> 
+      <div id="card-content">
         <ReactEmbedGist
           gist={`${ownerName}/${id}`}
           titleClass="gist-title"
         />
       </div>
-      <div className="card-footer">
-        <img src={ownerImageUrl} alt="User" className="user-image" />
-        <div className="user-details">
-          <span className="user-name">{ownerName}</span>{" "}
-          <span className="gist-name">{gistName}</span>
-          <div className="gist-info">
+      <div id="card-footer">
+        <img src={ownerImageUrl} alt="User" id="user-image" />
+        <div id="user-details">
+          <span id="user-name">{ownerName}</span>{" "}
+          <span id="gist-name">{gistName}</span>
+          <div id="gist-info">
             <span>Created at {createdAt}</span>
           </div>
         </div>

@@ -19,7 +19,7 @@ export default function DataTable({ data }: IdataTableProps) {
   };
 
   return (
-    <div className="data-table">
+    <div id="data-table">
       <table id="gists">
         <thead>
           <tr>
@@ -32,18 +32,18 @@ export default function DataTable({ data }: IdataTableProps) {
         <tbody>
           {pagination.selectedData.map((gist) => (
             <tr key={gist.id} onClick={() => handleGistClick(gist.id)}>
-              <td className="name-cell">
-                <img src={gist.ownerImageUrl} alt="img" className="profile-img" />
+              <td id="name-cell">
+                <img src={gist.ownerImageUrl} alt="img" id="profile-img" />
                 <p>{gist.ownerName}</p>
               </td>
               <td>{gist.gistName}</td>
               <td>
-                <button className="keyword-btn">Keyword</button>
+                <button id="keyword-btn">Keyword</button>
               </td>
               <td>
-                <div className="icon-text-container">
+                <div id="icon-text-container">
                   Last updated at {gist.updatedAt}
-                  <div className="icons">
+                  <div id="icons">
                     <FaCodeFork />
                     <CiStar />
                   </div>

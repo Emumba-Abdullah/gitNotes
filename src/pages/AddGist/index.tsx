@@ -45,15 +45,14 @@ export default function AddGist() {
   const { onSubmit } = useGistCreation(reset);
 
   return (
-    <div className="gist-container">
+    <div id="gist-container">
       <NavBar />
-      <form onSubmit={handleSubmit(onSubmit)} className="addGist">
+      <form onSubmit={handleSubmit(onSubmit)} id="addGist">
       
         <input
           {...register("description")}
           type="text"
           placeholder="This is a Git Description"
-          className="description-input"
           id="gist-description"
           required
         />
@@ -61,27 +60,27 @@ export default function AddGist() {
       
         <div id="file">
           {fields.map((item, index) => (
-            <div key={item.id} className="file-section">
+            <div key={item.id} id="file-section">
              
-              <div className="filename-container">
+              <div id="filename-container">
                 <input
                   {...register(`files.${index}.fileName`, { required: true })}
                   type="text"
                   placeholder="Filename including extension..."
-                  className="filename-input"
+                  id="filename-input"
                 />
                 
                 <button
                   type="button"
                   onClick={() => remove(index)}
-                  className="delete-button"
+                  id="delete-button"
                 >
                   <MdOutlineDeleteSweep />
                 </button>
               </div>
 
               
-              <div className="editor">
+              <div id="editor">
                 <Controller
                   name={`files.${index}.content`}
                   control={control}
@@ -104,12 +103,12 @@ export default function AddGist() {
         </div>
 
         
-        <div className="footer-container">
+        <div id="footer-container">
           
           <button
             type="button"
             onClick={() => append({ fileName: "", content: "" })}
-            className="add-file-button"
+            id="add-file-button"
           >
             Add File
           </button>

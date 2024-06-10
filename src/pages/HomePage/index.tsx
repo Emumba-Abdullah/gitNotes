@@ -16,6 +16,8 @@ import NoResultsFound from '../../components/notFound';
 
 import { MdOutlineNavigateNext, MdOutlineNavigateBefore } from "react-icons/md";
 
+import { TailSpin } from "react-loader-spinner";
+
 export default function HomePage() {
   
   const [filteredData, setFilteredData] = useState([]);
@@ -53,7 +55,7 @@ export default function HomePage() {
   };
 
   if (publicGistResponse.isLoading) {
-    return <div>Loading...</div>;
+    return <div id='spinner-container'><TailSpin color='#003b44'/> </div>
   }
 
   if (publicGistResponse.isError) {

@@ -1,0 +1,101 @@
+#container {
+  width: 100vw;
+  height: 100vh;
+  font-family: 'inter';
+  #gistpage-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 30px;
+    width: 85%;
+    #btn-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .btn {
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        width: 150px;
+        margin-left: 20px;
+        overflow: hidden;
+        background-color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+
+        div > * {
+          display: inline-block;
+          font-size: 22px;
+          margin: 0;
+          padding: 0;
+        }
+
+        h2 {
+          margin: 0;
+          padding: 0;
+        }
+
+        .icon-text {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 70%;
+          background-color: #003b44;
+          color: white;
+          height: 100%;
+
+          .icon {
+            font-size: 27px;
+          }
+        }
+
+        .action-times {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 30%;
+          height: 100%;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  #gist-content {
+    width: 85%;
+    margin: 30px auto;
+  }
+}
+
+#card-footer {
+  display: flex;
+  align-items: center;
+  padding-top: 10px;
+
+  #user-image {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    margin-right: 10px;
+  }
+
+  #user-details {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+
+    #user-name {
+      font-weight: bold;
+      font-family: inter;
+    }
+  }
+}
+
+#filled {
+  color: yellow;
+  margin-right: 10px;
+}

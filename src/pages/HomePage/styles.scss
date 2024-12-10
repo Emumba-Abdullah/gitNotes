@@ -1,0 +1,53 @@
+.cardLayout {
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 50px;
+}
+
+#spinner-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.layout-manager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 88%;
+  margin: 50px auto 30px;
+
+  h2 {
+    margin: 0;
+    font-family: 'inter';
+    color: black;
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.grid-container {
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 22%);
+  gap: 16px;
+}

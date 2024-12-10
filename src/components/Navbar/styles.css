@@ -1,24 +1,27 @@
 #navbar {
   display: flex;
-  border: 2px solid black;
   height: 9%;
   background: var(--primary-color);
   justify-content: space-between;
   align-items: center;
-  padding: 0.2% 3%;
+  padding: 20px 60px;
 }
 
 #logo {
   display: inline-block;
-  height: 48%;
-  width: 4.2%;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
 }
 
 h1 {
   display: inline-block;
   font-size: 45px;
-  margin-left: 1%;
+  margin-left: 10px;
   font-family: var(--font-family);
+  color: white;
+  margin: 0 10px;
+  cursor: pointer;
 }
 
 .item {
@@ -47,7 +50,7 @@ input[type='search'] {
   background: transparent;
   padding: 7px 8px;
   font-size: 14px;
-  color: inherit;
+  color: white;
   border-radius: inherit;
   width: 90%;
   font-family: var(--font-family);
@@ -103,4 +106,51 @@ button[type='submit'] {
 #menu-img {
   height: 55px;
   width: 55px;
+}
+
+#menu-container {
+  position: relative;
+  z-index: 1000;
+}
+
+#menu {
+  color: var(--text-color);
+  font-family: var(--font-family);
+  list-style: none;
+  width: 175px;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  border-radius: 9px;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  display: none;
+}
+
+#menu-container:hover #menu {
+  display: block;
+}
+
+li {
+  padding: 0;
+}
+
+#menu-item {
+  width: 100%;
+  padding: 13px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+#menu-item:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }

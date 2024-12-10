@@ -1,0 +1,100 @@
+@use './../../../index.scss';
+#data-table {
+  width: 88%;
+  margin: auto;
+  margin-bottom: 200px;
+}
+
+#gists {
+  width: 100%;
+  border: 2px solid #efefef;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  background-color: #efefef;
+  color: black;
+  box-sizing: border-box;
+  border-collapse: collapse;
+
+  th,
+  td {
+    border: 2px transparent;
+    border-bottom: 2px solid #efefef;
+    padding: 0 10px;
+  }
+
+  th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #efefef;
+    font-size: 18px;
+  }
+
+  tbody tr {
+    background-color: #fff;
+    font-size: 16px;
+    transition: background-color 0.5s ease;
+
+    &:hover {
+      cursor: pointer;
+      background-color: gray;
+    }
+
+    td {
+      padding: 10px 10px;
+    }
+  }
+
+  tfoot tr {
+    text-align: right;
+    td {
+      padding-top: 7px;
+      padding-bottom: 7px;
+    }
+  }
+
+  #profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 7px;
+  }
+
+  #name-cell {
+    display: flex;
+    align-items: center;
+  }
+
+  #icon-text-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #keyword-btn {
+    background-color: #00464f;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #00343a;
+    }
+  }
+
+  #icons {
+    color: #003b44;
+    cursor: pointer;
+    font-size: 22px;
+
+    > * {
+      margin-right: 10px;
+    }
+  }
+}

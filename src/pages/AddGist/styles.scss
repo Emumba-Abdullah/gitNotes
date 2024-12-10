@@ -1,0 +1,98 @@
+#gist-container {
+  width: 100%;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+}
+
+#addGist {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  margin: 40px auto;
+  border: none;
+}
+
+#gist-description {
+  width: 65%;
+  padding: 10px;
+  border: 2px solid gray;
+  border-radius: 5px;
+}
+
+#file {
+  width: 66.5%;
+  margin-top: 10px;
+  border: 2px solid #efefef;
+  overflow: hidden;
+  border-radius: 5px;
+
+  #filename-container {
+    width: 100%;
+    padding: 20px 2px;
+    background-color: #efefef;
+    display: flex;
+    padding-left: 30px;
+
+    #filename-input {
+      padding: 8px;
+      border: 2px solid #efefef;
+      border-radius: 5px;
+      width: 50%;
+    }
+  }
+}
+
+#delete-button {
+  color: rgb(186, 16, 16);
+  border: none;
+  font-size: 30px;
+  margin-left: 9px;
+  :hover {
+    cursor: pointer;
+  }
+}
+
+#add-file-button {
+  padding: 10px 20px;
+  background-color: red;
+  width: 100px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #efefef;
+  color: black;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#footer-container {
+  width: 66%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+#submitGist {
+  width: 100px;
+  height: 42px;
+  border: transparent;
+  background-color: #003b44;
+  border-radius: 5px;
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#submitGist:disabled {
+  background-color: #7a7a7a;
+  color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  display: none;
+}

@@ -1,0 +1,25 @@
+.pagination {
+  width: 88%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-family: 'inter';
+  font-size: large;
+  margin: 10px auto;
+
+  button {
+    background-color: #00464f;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}

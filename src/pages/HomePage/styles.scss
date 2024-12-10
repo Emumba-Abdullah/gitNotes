@@ -1,0 +1,70 @@
+.cardLayout {
+  width: 100%;
+  margin-bottom: 5%;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.layout-manager {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 88%;
+  margin: 2% auto 1%;
+
+  h2 {
+    margin: 0;
+    font-family: 'inter';
+    color: black;
+  }
+
+  .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+
+    .icon {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.grid-container {
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(4, 22%);
+  gap: 16px;
+}
+
+.pagination {
+  width: 88%;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-family: 'inter';
+  font-size: large;
+  margin: 10px auto;
+
+  button {
+    background-color: #00464f;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
+}
